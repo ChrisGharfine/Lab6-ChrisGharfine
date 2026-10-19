@@ -1,2 +1,114 @@
-# Lab6-ChrisGharfine
-Lab 6: automatic Python builds using PyBuilder and Makefiles by Chris Gharfine
+# Lab 6 Automatic Builds
+
+Chris Gharfine
+
+This repository completes the graded calculator exercise and both optional
+Makefile examples. Each project can be run from its own directory. Python 3.12,
+pip, and GNU Make are required; the calculator only requires Python and pip.
+
+## Setup
+
+Create a virtual environment at the repository root:
+
+```console
+python -m venv .venv
+```
+
+Activate it with `.venv\Scripts\Activate.ps1` in Windows PowerShell or
+`source .venv/bin/activate` on Linux/macOS. Use `python3` instead of `python`
+if that is the Python 3 command on your computer. Keep this environment active
+while running the commands below.
+
+## Graded calculator exercise
+
+```console
+cd calculator_Chris_Gharfine
+python -m pip install -r requirements.txt
+pyb run_unit_tests
+python -m unittest tests.unittest.calculator_Chris_Gharfine.test_calculator_Chris_Gharfine -v
+pyb clean install_build_dependencies run_unit_tests publish
+```
+
+The package implements `add(x, y)`, `subtract(x, y)`, `multiply(x, y)`,
+`divide(x, y)`, `modulus(x, y)`, `power(x, y)`, and `square_root(x)`.
+Division and modulus reject a zero divisor with `ValueError`. Square root
+rejects negative inputs with `ValueError`. Modulus follows Python's `%`
+semantics, including for negative numbers; exponentiation follows `**`.
+
+PyBuilder discovers the `test_*.py` files under `tests`, runs 21 unit tests,
+and generates distribution files under `target/dist`. A plain `pyb` runs the
+default `publish` task, including testing and packaging. Dependencies are
+installed automatically into PyBuilder's isolated build environments.
+
+For the required Moodle evidence, run the final command above in a terminal
+and capture its output. The screenshot must show the build directory containing
+`calculator_Chris_Gharfine`, successful completion, the finish timestamp,
+and total elapsed time. Submit the complete calculator project and that image.
+
+## Optional standalone Makefile exercise
+
+From the repository root:
+
+```console
+cd makefile_greeting
+make install
+make test
+make lint
+make package
+make clean
+```
+
+`app.py` prints `Hello, World!` when run with `python app.py`.
+The Makefile targets perform these tasks:
+
+| Target | Task |
+| --- | --- |
+| `install` | Install the pinned linting and packaging tools. |
+| `test` | Discover and execute the greeting unit tests. |
+| `lint` | Check source, tests, and packaging configuration with flake8. |
+| `package` | Build a source archive and wheel in `dist`. |
+| `clean` | Remove generated packages, metadata, and Python caches. |
+
+Packaging uses `python -m build`, replacing the legacy direct `setup.py`
+invocation while retaining the required source archive and wheel outputs.
+The clean recipe uses Python so it also works on Windows without Unix commands.
+
+## Optional combined PyBuilder and Makefile exercise
+
+From the repository root:
+
+```console
+cd my_python_project
+python -m pip install -r requirements.txt
+make all
+```
+
+| Target | Task |
+| --- | --- |
+| `install_deps` | Install the pinned PyBuilder version. |
+| `clean` | Run `pyb clean` to remove generated build output. |
+| `test` | Run the three greeting tests through PyBuilder. |
+| `build` | Run `pyb publish` to test and create distribution packages. |
+| `all` | Run dependency installation, cleanup, tests, and packaging in order. |
+
+`build` uses `publish` because that PyBuilder task produces the source archive
+and wheel. PyBuilder generates its packaging configuration in `target`.
+The Makefile gives repeatable names to the longer build commands and enforces
+the order of the complete workflow, including when Make is invoked with `-j`.
+Both Makefiles accept `PYTHON`; the combined one also accepts `PYB` overrides.
+
+## Automated checks and submission
+
+The GitHub Actions workflow runs on pushes to `main`, pull requests, and manual
+dispatch. It checks the calculator with both runners, runs every Makefile
+target, verifies cleanup preserves source files, and builds all three projects
+with Python 3.12.
+
+Make reduces repetitive typing, keeps commands consistent between computers,
+and provides a convenient entry point for automated checks. PyBuilder adds
+dependency management, test execution, and packaging through its task graph.
+
+Generated environments, caches, and distributions are ignored by Git. The
+repository contains the code and configuration needed to reproduce them.
+For the optional work, submit the two greeting project directories together
+with this explanation. Moodle upload is separate from publishing to GitHub.

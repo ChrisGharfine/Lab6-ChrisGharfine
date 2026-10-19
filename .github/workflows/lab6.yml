@@ -1,0 +1,44 @@
+name: Lab 6 builds
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install calculator build tooling
+        working-directory: calculator_Chris_Gharfine
+        run: python -m pip install -r requirements.txt
+      - name: Test and package calculator
+        working-directory: calculator_Chris_Gharfine
+        run: |
+          python -m unittest tests.unittest.calculator_Chris_Gharfine.test_calculator_Chris_Gharfine -v
+          pyb clean install_build_dependencies run_unit_tests publish
+      - name: Verify standalone Makefile targets
+        working-directory: makefile_greeting
+        run: |
+          make install
+          make test
+          make lint
+          make package
+          make clean
+          test -f app.py
+          test ! -d dist
+      - name: Verify combined Makefile targets
+        working-directory: my_python_project
+        run: |
+          make all
+          make clean
+          test -f src/main/python/my_module.py
+          test ! -d target

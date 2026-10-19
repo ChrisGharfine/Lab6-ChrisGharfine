@@ -40,10 +40,14 @@ and generates distribution files under `target/dist`. A plain `pyb` runs the
 default `publish` task, including testing and packaging. Dependencies are
 installed automatically into PyBuilder's isolated build environments.
 
-For the required Moodle evidence, run the final command above in a terminal
-and capture its output. The screenshot must show the build directory containing
-`calculator_Chris_Gharfine`, successful completion, the finish timestamp,
-and total elapsed time. Submit the complete calculator project and that image.
+Build evidence is included in [the calculator console screenshot](screenshots/calculator-build.jpg).
+It captures the actual GitHub Actions build output showing 21 passing tests,
+`BUILD SUCCESSFUL`, the base directory containing `calculator_Chris_Gharfine`,
+the finish timestamp, and the elapsed time of 14 seconds. The image is an
+unmodified capture of [the successful build console](https://github.com/ChrisGharfine/Lab6-ChrisGharfine/actions/runs/39244506465/job/118033042952).
+The [workflow summary screenshot](screenshots/workflow-success.jpg) shows the
+successful verification of all three projects. Submit the complete calculator
+project and the calculator console image as build evidence.
 
 ## Optional standalone Makefile exercise
 

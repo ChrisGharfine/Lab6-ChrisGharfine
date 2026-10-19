@@ -8,16 +8,15 @@ pip, and GNU Make are required; the calculator only requires Python and pip.
 
 ## Setup
 
-Create a virtual environment at the repository root:
+Virtual environment setup at the repository root:
 
 ```console
 python -m venv .venv
 ```
 
-Activate it with `.venv\Scripts\Activate.ps1` in Windows PowerShell or
-`source .venv/bin/activate` on Linux/macOS. Use `python3` instead of `python`
-if that is the Python 3 command on your computer. Keep this environment active
-while running the commands below.
+Activation uses `.venv\Scripts\Activate.ps1` in Windows PowerShell or
+`source .venv/bin/activate` on Linux/macOS. The commands below assume an active
+environment and Python 3.12 available as `python`.
 
 ## Graded calculator exercise
 
@@ -47,10 +46,6 @@ the finish timestamp, and the elapsed time of 14 seconds. The image is an
 unmodified capture of [the successful build console](https://github.com/ChrisGharfine/Lab6-ChrisGharfine/actions/runs/39244506465/job/118033042952).
 The [workflow summary screenshot](screenshots/workflow-success.jpg) shows the
 successful verification of all three projects. These are GitHub Actions captures.
-The lab specifically requests a terminal screenshot: run the final calculator
-command above in a local terminal and capture its successful build summary,
-including the base directory, finish timestamp, and elapsed time. Submit that
-terminal image together with the complete calculator project.
 
 ## Optional standalone Makefile exercise
 
@@ -104,7 +99,7 @@ The Makefile gives repeatable names to the longer build commands and enforces
 the order of the complete workflow, including when Make is invoked with `-j`.
 Both Makefiles accept `PYTHON`; the combined one also accepts `PYB` overrides.
 
-## Automated checks and submission
+## Automated checks
 
 The GitHub Actions workflow runs on pushes to `main`, pull requests, and manual
 dispatch. It checks the calculator with both runners, runs every Makefile
@@ -117,5 +112,3 @@ dependency management, test execution, and packaging through its task graph.
 
 Generated environments, caches, and distributions are ignored by Git. The
 repository contains the code and configuration needed to reproduce them.
-For the optional work, submit the two greeting project directories together
-with this explanation. Moodle upload is separate from publishing to GitHub.

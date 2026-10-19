@@ -46,8 +46,11 @@ It captures the actual GitHub Actions build output showing 21 passing tests,
 the finish timestamp, and the elapsed time of 14 seconds. The image is an
 unmodified capture of [the successful build console](https://github.com/ChrisGharfine/Lab6-ChrisGharfine/actions/runs/39244506465/job/118033042952).
 The [workflow summary screenshot](screenshots/workflow-success.jpg) shows the
-successful verification of all three projects. Submit the complete calculator
-project and the calculator console image as build evidence.
+successful verification of all three projects. These are GitHub Actions captures.
+The lab specifically requests a terminal screenshot: run the final calculator
+command above in a local terminal and capture its successful build summary,
+including the base directory, finish timestamp, and elapsed time. Submit that
+terminal image together with the complete calculator project.
 
 ## Optional standalone Makefile exercise
 
